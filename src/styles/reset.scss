@@ -1,0 +1,66 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+// 设置所有元素的默认滚动条
+* ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+* ::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+* ::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+// element-plus el-table 滚动条
+.el-table__body-wrapper {
+  &.is-scrolling-none {
+    // 当表格有右侧fixed 但是没有横向的滚动条时，去掉阴影等
+    ~.el-table__fixed-right {
+      height: 100% !important;
+      bottom: 0 !important;
+      box-shadow: none !important;
+    }
+    // 当表格有左侧fixed 但是没有横向的滚动条时，高度重置等
+    ~.el-table__fixed {
+      height: 100% !important;
+      bottom: 0 !important;
+    }
+  }
+}
+.el-table--border {
+  // 防止遮挡了滚动条
+  &::before {
+    bottom:  -1px !important
+  }
+  &::after {
+    right: -1px !important
+  }
+}
+.el-table__fixed, .el-table__fixed-right {
+  // 固定列高度只需偏移 自定义滚动条的宽度(8px)
+  height: calc(100% - 6px) !important;
+  .el-table__fixed-body-wrapper {
+    // 这里的44px 是表格头部的高度，不同size的table高度不一样
+    height: calc(100% - 44px) !important;
+  }
+}
+.el-table--scrollable-y {
+  // 有纵向滚动条时，右侧留出滚动条的宽度
+  .el-table__fixed-right {
+    right: 6px !important;
+  }
+}
+.el-table--scrollable-x:not(.el-table--scrollable-y) {
+  // 只有横向滚动条，没有纵向滚动条时， 右侧的无需预留宽度
+  .el-table__fixed-right {
+    right: 0 !important;
+  }
+}
+

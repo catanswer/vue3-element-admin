@@ -1,4 +1,5 @@
 import {
+  ElRow,
   ElCol,
   ElMenu,
   ElMenuItem,
@@ -27,6 +28,7 @@ import {
 
 const elementPlus = {
   install(Vue) {
+    Vue.use(ElRow)
     Vue.use(ElCol)
     Vue.use(ElMenu)
     Vue.use(ElMenuItem)

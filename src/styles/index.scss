@@ -18,3 +18,18 @@
   opacity: 0;
   transform: translateX(30px);
 }
+
+// breadcrumb
+.breadcrumb-leave-active,
+.breadcrumb-enter-active,
+.breadcrumb-move {
+  transition: all .5s;
+}
+
+.breadcrumb-enter-from, .breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(10px);
+}
+.breadcrumb-leave-active {
+  position: absolute;
+}

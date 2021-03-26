@@ -20,6 +20,8 @@ const router = createRouter({
     {
       path: '/components-show',
       component: Layout,
+      meta: { title: '组件展示' },
+      redirect: 'noRedirect',
       children: [
         {
           name: 'Table',
@@ -33,6 +35,7 @@ const router = createRouter({
     {
       path: '/setting',
       component: Layout,
+      redirect: 'noRedirect',
       children: [
         {
           name: 'Setting',
@@ -45,6 +48,7 @@ const router = createRouter({
     {
       path: '/about',
       component: Layout,
+      redirect: 'noRedirect',
       children: [
         {
           name: 'About',

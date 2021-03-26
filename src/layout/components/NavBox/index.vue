@@ -5,6 +5,7 @@
       class="hamburger-container"
       @toggleClick="toggleSideBar"
     />
+    <Breadcrumb />
   </div>
 </template>
 
@@ -12,6 +13,7 @@
   import { computed } from 'vue'
   import { useStore } from 'vuex'
   import Hamburger from './Hamburger.vue'
+  import Breadcrumb from './Breadcrumb.vue'
 
   const store = useStore()
   const isActive = computed(() => store.state.app.sideMenu.opened)

@@ -55,7 +55,7 @@
             </el-col>
           </el-row>
         </el-form> -->
-        <smart-query
+        <smart-form
           :data="yshData"
           :extraData="extraData"
           @submit="handleSearch"

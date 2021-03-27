@@ -17,6 +17,7 @@ import {
   ElSelect,
   ElOption,
   ElInput,
+  ElRadioGroup,
   ElRadio,
   ElCheckboxGroup,
   ElCheckbox,
@@ -46,6 +47,7 @@ const elementPlus = {
     Vue.use(ElSelect)
     Vue.use(ElOption)
     Vue.use(ElInput)
+    Vue.use(ElRadioGroup)
     Vue.use(ElRadio)
     Vue.use(ElCheckboxGroup)
     Vue.use(ElCheckbox)

@@ -52,6 +52,7 @@
             :label="item.options.label"
             :tabindex="item.options.tabindex"
             :validate-event="item.options.validateEvent"
+            @change="handleChange(item.key)"
           />
           <el-radio-group
             v-if="item.mode === 'radio'"
@@ -60,6 +61,7 @@
             :disabled="item.options.disabled"
             :text-color="item.options.textColor"
             :fill="item.options.fill"
+            @change="handleChange(item.key)"
           >
             <el-radio
               v-for="radio in item.options.directors"
@@ -79,6 +81,7 @@
             :max="item.options.max"
             :text-color="item.options.textColor"
             :fill="item.options.fill"
+            @change="handleChange(item.key)"
           >
             <el-checkbox
               v-for="checkbox in item.options.directors"
@@ -94,6 +97,7 @@
             :size="item.options.size"
             :clearable="item.options.clearable"
             :placeholder="item.options.placeholder"
+            @change="handleChange(item.key)"
           >
             <el-option
               v-for="select in item.options.directors"
@@ -125,6 +129,7 @@
             :default-value="item.options.defaultValue"
             :prefix-icon="item.options.prefixIcon"
             :clear-icon="item.options.clearIcon"
+            @change="handleChange(item.key)"
           />
           <el-time-select
             v-if="item.mode === 'timeSelect'"
@@ -140,6 +145,7 @@
             :placeholder="item.options.placeholder"
             :min-time="item.options.minTime"
             :max-time="item.options.maxTime"
+            @change="handleChange(item.key)"
           />
           <el-date-picker
             v-if="item.mode === 'datePicker'"
@@ -159,6 +165,7 @@
             :clear-icon="item.options.clearIcon"
             :shortcuts="item.options.shortcuts"
             :disabledDate="item.options.disabledDate"
+            @change="handleChange(item.key)"
           />
           <el-switch
             v-if="item.mode === 'switch'"
@@ -174,6 +181,7 @@
             :inactive-text="item.options.inactiveText"
             :active-value="item.options.activeValue"
             :inactive-value="item.options.inactiveValue"
+            @change="handleChange(item.key)"
           />
           <el-slider
             v-if="item.mode === 'slider'"
@@ -194,6 +202,7 @@
             :debounce="item.options.debounce"
             :tooltip-class="item.options.tooltipClass"
             :marks="item.options.marks"
+            @change="handleChange(item.key)"
           />
           <el-input-number
             v-if="item.mode === 'inputNumber'"
@@ -208,6 +217,7 @@
             :controls="item.options.controls"
             :controls-position="item.options.controlsPosition"
             :placeholder="item.options.placeholder"
+            @change="handleChange(item.key)"
           />
           <el-cascader
             v-if="item.mode === 'cascader'"
@@ -226,6 +236,7 @@
             :debounce="item.options.debounce"
             :before-filter="item.options.beforeFilter"
             :popper-class="item.options.popperClass"
+            @change="handleChange(item.key)"
           />
           <div class="samrt-color-picker" v-if="item.mode === 'colorPicker'">
             <el-color-picker
@@ -237,12 +248,14 @@
               :color-format	="item.options.colorFormat"
               :popper-class="item.options.popperClass"
               :predefine="item.options.predefine"
+              @change="handleChange(item.key)"
             />
             <el-input
               v-if="item.mode === 'colorPicker'"
               v-model="form[item.key]"
               :disabled="item.options.disabled"
               :size="item.options.size"
+              @change="handleChange(item.key)"
             />
           </div>
         </el-form-item>
@@ -288,6 +301,7 @@
             :label="item.options.label"
             :tabindex="item.options.tabindex"
             :validate-event="item.options.validateEvent"
+            @change="handleChange(item.key)"
           />
           <el-radio-group
             v-if="item.mode === 'radio'"
@@ -296,6 +310,7 @@
             :disabled="item.options.disabled"
             :text-color="item.options.textColor"
             :fill="item.options.fill"
+            @change="handleChange(item.key)"
           >
             <el-radio
               v-for="radio in item.options.directors"
@@ -315,6 +330,7 @@
             :max="item.options.max"
             :text-color="item.options.textColor"
             :fill="item.options.fill"
+            @change="handleChange(item.key)"
           >
             <el-checkbox
               v-for="checkbox in item.options.directors"
@@ -330,6 +346,7 @@
             :size="item.options.size"
             :clearable="item.options.clearable"
             :placeholder="item.options.placeholder"
+            @change="handleChange(item.key)"
           >
             <el-option
               v-for="select in item.options.directors"
@@ -361,6 +378,7 @@
             :default-value="item.options.defaultValue"
             :prefix-icon="item.options.prefixIcon"
             :clear-icon="item.options.clearIcon"
+            @change="handleChange(item.key)"
           />
           <el-time-select
             v-if="item.mode === 'timeSelect'"
@@ -376,6 +394,7 @@
             :placeholder="item.options.placeholder"
             :min-time="item.options.minTime"
             :max-time="item.options.maxTime"
+            @change="handleChange(item.key)"
           />
           <el-date-picker
             v-if="item.mode === 'datePicker'"
@@ -395,6 +414,7 @@
             :clear-icon="item.options.clearIcon"
             :shortcuts="item.options.shortcuts"
             :disabledDate="item.options.disabledDate"
+            @change="handleChange(item.key)"
           />
           <el-switch
             v-if="item.mode === 'switch'"
@@ -410,6 +430,7 @@
             :inactive-text="item.options.inactiveText"
             :active-value="item.options.activeValue"
             :inactive-value="item.options.inactiveValue"
+            @change="handleChange(item.key)"
           />
           <el-slider
             v-if="item.mode === 'slider'"
@@ -430,6 +451,7 @@
             :debounce="item.options.debounce"
             :tooltip-class="item.options.tooltipClass"
             :marks="item.options.marks"
+            @change="handleChange(item.key)"
           />
           <el-input-number
             v-if="item.mode === 'inputNumber'"
@@ -444,6 +466,7 @@
             :controls="item.options.controls"
             :controls-position="item.options.controlsPosition"
             :placeholder="item.options.placeholder"
+            @change="handleChange(item.key)"
           />
           <el-cascader
             v-if="item.mode === 'cascader'"
@@ -462,6 +485,7 @@
             :debounce="item.options.debounce"
             :before-filter="item.options.beforeFilter"
             :popper-class="item.options.popperClass"
+            @change="handleChange(item.key)"
           />
           <div class="samrt-color-picker" v-if="item.mode === 'colorPicker'">
             <el-color-picker
@@ -473,12 +497,14 @@
               :color-format	="item.options.colorFormat"
               :popper-class="item.options.popperClass"
               :predefine="item.options.predefine"
+              @change="handleChange(item.key)"
             />
             <el-input
               v-if="item.mode === 'colorPicker'"
               v-model="form[item.key]"
               :disabled="item.options.disabled"
               :size="item.options.size"
+              @change="handleChange(item.key)"
             />
           </div>
           </el-form-item>
@@ -527,7 +553,7 @@
       type: Array
     }
   })
-  const emits = defineEmit(['submit', 'toggle'])
+  const emits = defineEmit(['change', 'submit', 'toggle'])
   const extraVis = ref(false)
 
   // 初始化表单元素的值
@@ -552,7 +578,7 @@
 
   // form change
   const handleChange = (key) => {
-    console.log('key: ', key);
+    emits('change', key, form[key])
   }
 </script>
 

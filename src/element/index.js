@@ -17,6 +17,7 @@ import {
   ElSelect,
   ElOption,
   ElInput,
+  ElInputNumber,
   ElRadioGroup,
   ElRadio,
   ElCheckboxGroup,
@@ -26,7 +27,10 @@ import {
   ElTimeSelect,
   ElDatePicker,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElSlider,
+  ElCascader,
+  ElColorPicker
 } from 'element-plus'
 
 const elementPlus = {
@@ -49,6 +53,7 @@ const elementPlus = {
     Vue.use(ElSelect)
     Vue.use(ElOption)
     Vue.use(ElInput)
+    Vue.use(ElInputNumber)
     Vue.use(ElRadioGroup)
     Vue.use(ElRadio)
     Vue.use(ElCheckboxGroup)
@@ -59,6 +64,9 @@ const elementPlus = {
     Vue.use(ElDatePicker)
     Vue.use(ElBreadcrumb)
     Vue.use(ElBreadcrumbItem)
+    Vue.use(ElSlider)
+    Vue.use(ElCascader)
+    Vue.use(ElColorPicker)
   }
 }
 

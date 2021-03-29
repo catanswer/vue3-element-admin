@@ -18,6 +18,6 @@
     "@vue/compiler-sfc": "^3.0.5",
     "sass": "^1.32.8",
     "vite": "^2.0.5",
-    "vite-plugin-babel-import": "^2.0.2"
+    "vite-plugin-imp": "^2.0.5"
   }
 }

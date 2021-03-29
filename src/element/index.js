@@ -7,7 +7,7 @@ import {
   ElMenuItemGroup,
   ElButton,
   ElIcon,
-  ELScrollbar,
+  ElScrollbar,
   ElPopper,
   ElTable,
   ElTableColumn,
@@ -39,7 +39,7 @@ const elementPlus = {
     Vue.use(ElMenuItemGroup)
     Vue.use(ElButton)
     Vue.use(ElIcon)
-    Vue.use(ELScrollbar)
+    Vue.use(ElScrollbar)
     Vue.use(ElPopper)
     Vue.use(ElTable)
     Vue.use(ElTableColumn)

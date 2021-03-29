@@ -7,7 +7,7 @@ import SmartLayout from '@/components/SmartLayout/index.js'
 
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 import { locale } from 'element-plus'
-locale.use(lang)
+locale(lang)
 
 // import ElementPlus from 'element-plus';
 // import 'element-plus/lib/theme-chalk/index.css';

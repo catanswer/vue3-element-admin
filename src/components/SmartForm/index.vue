@@ -510,23 +510,27 @@
           </el-form-item>
         </el-col>
       </template>
-      <el-col :span="options.colSpan || 6">
-        <el-form-item label-width="0">
-          <el-button type="primary" @click="handleSubmit">查询</el-button>
-          <el-button
-            v-if="extraData && extraData.length > 0"
-            plain
-            :icon="extraVis ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"
-            @click="handleToggle"
-          >{{extraVis ? '收起' : '展开'}}</el-button>
-        </el-form-item>
-      </el-col>
+      <slot>
+        <el-col :span="options.colSpan || 6">
+          <el-form-item label-width="0">
+            <el-button type="primary" @click="handleSubmit">查询</el-button>
+            <el-button
+              v-if="extraData && extraData.length > 0"
+              plain
+              :icon="extraVis ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"
+              @click="handleToggle"
+            >{{extraVis ? '收起' : '展开'}}</el-button>
+          </el-form-item>
+        </el-col>
+      </slot>
     </el-row>
   </el-form>
 </template>
 
 <script setup>
-  import { defineEmit, defineProps, reactive, ref } from 'vue'
+  import { defineEmit, defineProps, reactive, ref, useContext  } from 'vue'
+
+  const { expose } = useContext()
 
   const props = defineProps({
     options: {
@@ -580,6 +584,12 @@
   const handleChange = (key) => {
     emits('change', key, form[key])
   }
+  
+  const getFormData = () => form
+
+  expose({
+    getFormData
+  })
 </script>
 
 <style lang='scss' scoped>

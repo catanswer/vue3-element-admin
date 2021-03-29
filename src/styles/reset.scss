@@ -64,3 +64,8 @@ html, body {
   }
 }
 
+// color-picker 弹窗中清空文字的样式
+.el-color-dropdown__link-btn.el-button--text {
+  padding: 7px 15px;
+}
+

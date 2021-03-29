@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vitePluginImport from 'vite-plugin-babel-import'
+import vitePluginImp from 'vite-plugin-imp'
 
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
@@ -8,19 +8,17 @@ const resolve = dir => path.join(__dirname, dir)
 export default defineConfig({
   plugins: [
     vue(),
-    vitePluginImport([
-      {
-        libraryName: 'element-plus',
-        libraryDirectory: 'es',
-        style(name) {
-          if (name === 'locale') {
-            return `element-plus/lib/theme-chalk/el-option.css`
-          } else {
-            return `element-plus/lib/theme-chalk/${name}.css`
+    vitePluginImp({
+      libList: [{
+        libName: 'element-plus',
+          style: (name) => {
+            if (name === 'locale' || name === 'el-date-time-picker') {
+              return false
+            }
+            return`element-plus/lib/theme-chalk/${name}.css`
           }
-        }
-      }
-    ])
+      }]
+    })
   ],
   base: '/',
   resolve: {

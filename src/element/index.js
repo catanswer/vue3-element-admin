@@ -23,6 +23,8 @@ import {
   ElCheckbox,
   ElSwitch,
   ElTimePicker,
+  ElTimeSelect,
+  ElDatePicker,
   ElBreadcrumb,
   ElBreadcrumbItem
 } from 'element-plus'
@@ -53,6 +55,8 @@ const elementPlus = {
     Vue.use(ElCheckbox)
     Vue.use(ElSwitch)
     Vue.use(ElTimePicker)
+    Vue.use(ElTimeSelect)
+    Vue.use(ElDatePicker)
     Vue.use(ElBreadcrumb)
     Vue.use(ElBreadcrumbItem)
   }

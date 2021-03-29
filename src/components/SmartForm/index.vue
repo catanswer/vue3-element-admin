@@ -131,22 +131,6 @@
             :clear-icon="item.options.clearIcon"
             @change="handleChange(item.key)"
           />
-          <el-time-select
-            v-if="item.mode === 'timeSelect'"
-            v-model="form[item.key]"
-            :start="item.options.start"
-            :step="item.options.step"
-            :end="item.options.end"
-            :editable="item.options.editable"
-            :clearable="item.options.clearable"
-            :size="item.options.size"
-            :prefix-icon="item.options.prefixIcon"
-            :clear-icon="item.options.clearIcon"
-            :placeholder="item.options.placeholder"
-            :min-time="item.options.minTime"
-            :max-time="item.options.maxTime"
-            @change="handleChange(item.key)"
-          />
           <el-date-picker
             v-if="item.mode === 'datePicker'"
             v-model="form[item.key]"
@@ -380,22 +364,6 @@
             :clear-icon="item.options.clearIcon"
             @change="handleChange(item.key)"
           />
-          <el-time-select
-            v-if="item.mode === 'timeSelect'"
-            v-model="form[item.key]"
-            :start="item.options.start"
-            :step="item.options.step"
-            :end="item.options.end"
-            :editable="item.options.editable"
-            :clearable="item.options.clearable"
-            :size="item.options.size"
-            :prefix-icon="item.options.prefixIcon"
-            :clear-icon="item.options.clearIcon"
-            :placeholder="item.options.placeholder"
-            :min-time="item.options.minTime"
-            :max-time="item.options.maxTime"
-            @change="handleChange(item.key)"
-          />
           <el-date-picker
             v-if="item.mode === 'datePicker'"
             v-model="form[item.key]"
@@ -581,7 +549,7 @@
   }
 
   // form change
-  const handleChange = (key) => {
+  const handleChange = key => {
     emits('change', key, form[key])
   }
   

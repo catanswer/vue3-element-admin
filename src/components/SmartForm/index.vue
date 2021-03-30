@@ -569,6 +569,11 @@
       display: block;
       width: 100%;
     }
+    :deep(.el-checkbox-group) {
+      .el-checkbox {
+        float: left;
+      }
+    }
     :deep(.el-date-editor) {
       width: 100% !important
     }

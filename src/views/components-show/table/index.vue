@@ -8,11 +8,12 @@
           :data="formData"
           :extraData="extraData"
           @submit="handleSearch"
-          @change="handleChange"
+          @change="handleQueryChange"
         />
       </template>
-      <el-table
-        :data="tableData"
+      <!-- <el-table
+        ref="elTable"
+        :data="tableData1"
         size="medium"
         border
         height="100%"
@@ -70,20 +71,29 @@
           prop="address"
           label="地址">
         </el-table-column>
-      </el-table>
-      <template #bottom>
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="400"
-          style="padding-top: 10px;text-align: right"
-        >
-        </el-pagination>
-      </template>
+      </el-table> -->
+      <SmartTable
+        :btnsData="btnsData"
+        :tableData="tableData"
+        @tableEvents="handleTableEvents"
+        @pagination="handlePagination"
+      >
+        <template #col-tags="{row: { tags }}">
+          <el-tag
+            v-for="item in tags"
+            :key="item.txt"
+            :type="item.type"
+          >{{ item.txt }}</el-tag>
+        </template>
+      </SmartTable>
+      <!-- <template #bottom>
+        <SmartPagination
+          :total="total"
+          v-model:page="listPage.page"
+          v-model:limit="listPage.limit"
+          @pagination="handlePagination"
+        />
+      </template> -->
     </smart-layout>
   </div>
 </template>
@@ -91,7 +101,10 @@
 <script setup>
   import { reactive, ref } from 'vue'
   import SmartForm from '@/components/SmartForm/index.vue'
+  import SmartPagination from '@/components/SmartPagination/index.vue'
+  import SmartTable from '@/components/SmartTable/index.vue'
 
+  // 搜索条件表单数据
   const options = reactive({
     labelWidth: '100px',
     rules: {
@@ -169,16 +182,9 @@
       label: '条件5',
       key: 'condition5',
       options: {
-        value: [],
-        isRange: true
-      }
-    },
-    {
-      mode: 'timeSelect',
-      label: '条件6',
-      key: 'condition6',
-      options: {
         value: ''
+        // value: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        // isRange: true
       }
     },
     {
@@ -447,77 +453,333 @@
   ])
   
   ref: smartForm = null
-
   const handleSearch = (form) => {
     console.log('formData: ', formData)
     console.log('form: ', form)
     console.log('getFormData: ', smartForm.getFormData());
   }
-  const handleChange = (key, value) => {
+  const handleQueryChange = (key, value) => {
     console.log('key: ', key)
     console.log('value: ', value)
-  } 
-
-  // 表格数据
-  const tableData = reactive([{
-    date: '2016-05-02',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1518 弄'
-  }, {
-    date: '2016-05-04',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1517 弄'
-  }, {
-    date: '2016-05-01',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1519 弄'
-  }, {
-    date: '2016-05-04',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1517 弄'
-  }, {
-    date: '2016-05-01',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1519 弄'
-  }, {
-    date: '2016-05-03',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1516 弄'
-  },{
-    date: '2016-05-02',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1518 弄'
-  }, {
-    date: '2016-05-04',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1517 弄'
-  }, {
-    date: '2016-05-01',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1519 弄'
-  }, {
-    date: '2016-05-03',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1516 弄'
-  }, {
-    date: '2016-05-04',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1517 弄'
-  }, {
-    date: '2016-05-01',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1519 弄'
-  }])
-
-  // 分页
-  let currentPage = ref(1)
-  const handleSizeChange = (val) => {
-    console.log(`每页 ${val} 条`)
   }
-  const handleCurrentChange = (val) => {
-    console.log(`当前页: ${val}`)
-  }
+  
 
+  // 表格上方按钮事件
+  const btnsData = {
+    add: {
+      show: true,
+      name: '添加',
+      disabled: false
+    },
+    delete: {
+      show: true,
+      mode: 'popconfirm',
+      name: '删除',
+      disabled: false,
+      popOptions: {
+        title: '确定要删除吗？'
+      }
+    }
+  }
+  
+  // 表格配置对象
+  const tableData = {
+    loading: false,
+    showCheckBox: true,
+    showIndex: true,
+    cols: [
+      {
+        hidden: false,
+        key: 'date',
+        width: 200,
+        fixed: true,
+        label: '时间'
+      },
+      {
+        key: 'userName',
+        width: 200,
+        fixed: false,
+        label: '用户名'
+      },
+      {
+        key: 'tags',
+        fixed: false,
+        width: 200,
+        label: '标签',
+        type: 'slot'
+      },
+      {
+        key: 'address',
+        fixed: false,
+        width: 1000,
+        label: '地址'
+      }
+    ],
+    handle: {
+      fixed: 'right',
+      label: '操作',
+      width: 210,
+      btns: [
+        {
+          show: true,
+          label: '编辑',
+          event: 'edit',
+        },
+        {
+          show: true,
+          label: '启用',
+          event: 'start',
+          type: 'success',
+          disabled: false,
+          loading: 'startLoading'
+        },
+        {
+          show: true,
+          label: '停用',
+          event: 'stop',
+          type: 'danger',
+          disabled: true,
+          loading: 'stopLoading'
+        }
+      ]
+    },
+    data: [
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        startLoading: false,
+        stopLoading: false,
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        }]
+      },
+      {
+        date: '2021-03-30',
+        userName: '李小龙',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tags: [{
+          txt: '朋友',
+          type: 'success'
+        },{
+          txt: '家人',
+          type: 'warning'
+        }]
+      }
+    ],
+    pagination: {
+      show: true,
+      total: 20,
+      page: 1,
+      limit: 30
+    }
+  }
+  // 统一处理表格组件的事件
+  const handleTableEvents = (event, data) => {
+    switch (event) {
+      case 'add':
+        console.log('触发了添加事件')
+        break;
+      case 'deleteOk':
+        console.log('触发了删除-确认事件')
+        break;
+      case 'deleteCancel':
+        console.log('触发了删除-取消事件')
+        break;
+      case 'check':
+        console.log('触发了表格check事件')
+        console.log('data: ', data)
+        break;
+      case 'edit':
+        console.log('触发了表格内按钮 - 编辑事件')
+        console.log('data: ', data)
+        break;
+      case 'start':
+        console.log('触发了表格内按钮 - 启用事件')
+        console.log('data: ', data)
+        break;
+      case 'stop':
+        console.log('触发了表格内按钮 - 停用事件')
+        console.log('data: ', data)
+        break;
+      default:
+        break;
+    }
+  }
+  // 分页处理事件
+  const handlePagination = ({ page, limit }) => {
+    console.log(`当前第 ${page} 页`)
+    console.log(`每页 ${limit} 条`)
+  }
 </script>
 
 <style lang='scss' scoped>

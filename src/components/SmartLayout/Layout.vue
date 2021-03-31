@@ -3,7 +3,6 @@
     <div
       v-if="types === 'auto'"
       class="auto-container"
-      :style="tOffsetStyle"
       :class="wrapClass"
     >
       <slot name="top" />
@@ -13,7 +12,6 @@
     <div
       v-if="types === 'scroll'"
       class="scroll-container"
-      :style="tOffsetStyle"
       :class="wrapClass"
     >
       <slot name="scroll" />
@@ -56,6 +54,7 @@
   }
   .auto-container, .scroll-container {
     box-sizing: border-box;
+    height: 100%;
   }
 </style>
 

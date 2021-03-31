@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <smart-layout>
+    <smart-layout types="auto">
       <template #top>
         <div style="height: 100px; background: red"></div>
       </template>

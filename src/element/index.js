@@ -30,7 +30,10 @@ import {
   ElBreadcrumbItem,
   ElSlider,
   ElCascader,
-  ElColorPicker
+  ElColorPicker,
+  ElPopconfirm,
+  ElLoading,
+  ElTag
 } from 'element-plus'
 
 const elementPlus = {
@@ -67,6 +70,9 @@ const elementPlus = {
     Vue.use(ElSlider)
     Vue.use(ElCascader)
     Vue.use(ElColorPicker)
+    Vue.use(ElPopconfirm)
+    Vue.use(ElLoading)
+    Vue.use(ElTag)
   }
 }
 

@@ -34,15 +34,6 @@ html, body {
     }
   }
 }
-.el-table--border {
-  // 防止遮挡了滚动条
-  &::before {
-    bottom:  -1px !important
-  }
-  &::after {
-    right: -1px !important
-  }
-}
 .el-table__fixed, .el-table__fixed-right {
   // 固定列高度只需偏移 自定义滚动条的宽度(8px)
   height: calc(100% - 6px) !important;

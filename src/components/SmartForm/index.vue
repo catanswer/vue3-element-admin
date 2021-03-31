@@ -131,22 +131,6 @@
             :clear-icon="item.options.clearIcon"
             @change="handleChange(item.key)"
           />
-          <el-time-select
-            v-if="item.mode === 'timeSelect'"
-            v-model="form[item.key]"
-            :start="item.options.start"
-            :step="item.options.step"
-            :end="item.options.end"
-            :editable="item.options.editable"
-            :clearable="item.options.clearable"
-            :size="item.options.size"
-            :prefix-icon="item.options.prefixIcon"
-            :clear-icon="item.options.clearIcon"
-            :placeholder="item.options.placeholder"
-            :min-time="item.options.minTime"
-            :max-time="item.options.maxTime"
-            @change="handleChange(item.key)"
-          />
           <el-date-picker
             v-if="item.mode === 'datePicker'"
             v-model="form[item.key]"
@@ -380,22 +364,6 @@
             :clear-icon="item.options.clearIcon"
             @change="handleChange(item.key)"
           />
-          <el-time-select
-            v-if="item.mode === 'timeSelect'"
-            v-model="form[item.key]"
-            :start="item.options.start"
-            :step="item.options.step"
-            :end="item.options.end"
-            :editable="item.options.editable"
-            :clearable="item.options.clearable"
-            :size="item.options.size"
-            :prefix-icon="item.options.prefixIcon"
-            :clear-icon="item.options.clearIcon"
-            :placeholder="item.options.placeholder"
-            :min-time="item.options.minTime"
-            :max-time="item.options.maxTime"
-            @change="handleChange(item.key)"
-          />
           <el-date-picker
             v-if="item.mode === 'datePicker'"
             v-model="form[item.key]"
@@ -510,23 +478,27 @@
           </el-form-item>
         </el-col>
       </template>
-      <el-col :span="options.colSpan || 6">
-        <el-form-item label-width="0">
-          <el-button type="primary" @click="handleSubmit">查询</el-button>
-          <el-button
-            v-if="extraData && extraData.length > 0"
-            plain
-            :icon="extraVis ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"
-            @click="handleToggle"
-          >{{extraVis ? '收起' : '展开'}}</el-button>
-        </el-form-item>
-      </el-col>
+      <slot>
+        <el-col :span="options.colSpan || 6">
+          <el-form-item label-width="0">
+            <el-button type="primary" @click="handleSubmit">查询</el-button>
+            <el-button
+              v-if="extraData && extraData.length > 0"
+              plain
+              :icon="extraVis ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"
+              @click="handleToggle"
+            >{{extraVis ? '收起' : '展开'}}</el-button>
+          </el-form-item>
+        </el-col>
+      </slot>
     </el-row>
   </el-form>
 </template>
 
 <script setup>
-  import { defineEmit, defineProps, reactive, ref } from 'vue'
+  import { defineEmit, defineProps, reactive, ref, useContext  } from 'vue'
+
+  const { expose } = useContext()
 
   const props = defineProps({
     options: {
@@ -577,9 +549,15 @@
   }
 
   // form change
-  const handleChange = (key) => {
+  const handleChange = key => {
     emits('change', key, form[key])
   }
+  
+  const getFormData = () => form
+
+  expose({
+    getFormData
+  })
 </script>
 
 <style lang='scss' scoped>
@@ -590,6 +568,11 @@
     .el-select {
       display: block;
       width: 100%;
+    }
+    :deep(.el-checkbox-group) {
+      .el-checkbox {
+        float: left;
+      }
     }
     :deep(.el-date-editor) {
       width: 100% !important

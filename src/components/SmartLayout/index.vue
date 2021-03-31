@@ -1,13 +1,5 @@
 <template>
-  <div
-    class="auto-container"
-    :class="wrapClass"
-  >
-    <slot name="top" />
-      <slot />
-    <slot name="bottom" />
-  </div>
-  <!-- <Layout
+  <Layout
     v-if="types === 'scroll'"
     :types="types"
     :topOffset="topOffset"
@@ -20,7 +12,7 @@
     </template>
   </Layout>
   <Layout
-    v-else
+    v-else-if="types === 'auto'"
     :types="types"
     :topOffset="topOffset"
     :wrap-class="wrapClass"
@@ -38,25 +30,34 @@
         <slot name="bottom" />
       </div>
     </template>
-  </Layout> -->
+  </Layout>
 </template>
 
 <script setup>
   import { defineProps, computed } from 'vue'
+  import Layout from './Layout.vue'
 
   const props = defineProps({
     wrapClass: {
       type: String,
       default: ''
+    },
+    types: {
+      type: String,
+      default: 'auto'
+    },
+    topOffset: {
+      type: Number,
+      default: 50
     }
   })
 </script>
 
 
 <style lang="scss" scoped>
-.auto-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+  .layout-container {
+    // display: flex;
+    // flex-direction: column;
+    height: 100%;
+  }
 </style>

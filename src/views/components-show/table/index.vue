@@ -11,67 +11,6 @@
           @change="handleQueryChange"
         />
       </template>
-      <!-- <el-table
-        ref="elTable"
-        :data="tableData1"
-        size="medium"
-        border
-        height="100%"
-        style="width: 100%;">
-        <el-table-column
-          fixed
-          prop="date"
-          label="日期"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          fixed
-          prop="name"
-          label="姓名"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          width="150"
-          prop="address"
-          label="地址">
-        </el-table-column>
-        <el-table-column
-          width="150"
-          prop="address"
-          label="地址">
-        </el-table-column>
-        <el-table-column
-          width="250"
-          prop="address"
-          label="地址">
-        </el-table-column>
-        <el-table-column
-          width="250"
-          prop="address"
-          label="地址">
-        </el-table-column>
-        <el-table-column
-          width="150"
-          prop="address"
-          label="地址">
-        </el-table-column>
-        <el-table-column
-          width="150"
-          prop="address"
-          label="地址">
-        </el-table-column>
-        <el-table-column
-          width="150"
-          prop="address"
-          label="地址">
-        </el-table-column>
-        <el-table-column
-          fixed="right"
-          width="200"
-          prop="address"
-          label="地址">
-        </el-table-column>
-      </el-table> -->
       <SmartTable
         :btnsData="btnsData"
         :tableData="tableData"
@@ -86,14 +25,6 @@
           >{{ item.txt }}</el-tag>
         </template>
       </SmartTable>
-      <!-- <template #bottom>
-        <SmartPagination
-          :total="total"
-          v-model:page="listPage.page"
-          v-model:limit="listPage.limit"
-          @pagination="handlePagination"
-        />
-      </template> -->
     </smart-layout>
   </div>
 </template>

@@ -3,51 +3,57 @@
     class="auto-container"
     :class="wrapClass"
   >
-    <slot name="top" />
-      <slot />
-    <slot name="bottom" />
-  </div>
-  <!-- <Layout
-    v-if="types === 'scroll'"
-    :types="types"
-    :topOffset="topOffset"
-    :wrap-class="wrapClass"
-  >
-    <template #scroll>
-      <el-scrollbar>
+    <Layout
+      v-if="types === 'scroll'"
+      :types="types"
+      :topOffset="topOffset"
+      :wrap-class="wrapClass"
+    >
+      <template #scroll>
+        <el-scrollbar>
+          <slot />
+        </el-scrollbar>
+      </template>
+    </Layout>
+    <Layout
+      v-else-if="types === 'auto'"
+      :types="types"
+      :topOffset="topOffset"
+      :wrap-class="wrapClass"
+    >
+      <template #top>
+        <div class="top-wrapper">
+          <slot name="top" />
+        </div>
+      </template>
+      <template #center>
         <slot />
-      </el-scrollbar>
-    </template>
-  </Layout>
-  <Layout
-    v-else
-    :types="types"
-    :topOffset="topOffset"
-    :wrap-class="wrapClass"
-  >
-    <template #top>
-      <div class="top-wrapper">
-        <slot name="top" />
-      </div>
-    </template>
-    <template #center>
-      <slot />
-    </template>
-    <template #bottom>
-      <div class="bottom-wrapper">
-        <slot name="bottom" />
-      </div>
-    </template>
-  </Layout> -->
+      </template>
+      <template #bottom>
+        <div class="bottom-wrapper">
+          <slot name="bottom" />
+        </div>
+      </template>
+    </Layout>
+  </div>
 </template>
 
 <script setup>
   import { defineProps, computed } from 'vue'
+  import Layout from './Layout.vue'
 
   const props = defineProps({
     wrapClass: {
       type: String,
       default: ''
+    },
+    types: {
+      type: String,
+      default: 'auto'
+    },
+    topOffset: {
+      type: Number,
+      default: 50
     }
   })
 </script>

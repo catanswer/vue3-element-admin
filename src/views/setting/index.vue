@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <smart-layout>
+    <smart-layout types="auto">
       asdad
     </smart-layout>
   </div>

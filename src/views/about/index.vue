@@ -1,9 +1,9 @@
 <template>
-  <el-scrollbar>
-    <div class="page-container">
+  <div class="page-container">
+    <smart-layout types="scroll">
       <div style="height: 1000px; ">123213</div>
-    </div>
-  </el-scrollbar>
+    </smart-layout>
+  </div>
 </template>
 
 <script setup>

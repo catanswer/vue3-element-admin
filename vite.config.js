@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vitePluginImp from 'vite-plugin-imp'
+import clearSth from 'vite-plugin-clear-sth'
 
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
@@ -8,6 +9,9 @@ const resolve = dir => path.join(__dirname, dir)
 export default defineConfig({
   plugins: [
     vue(),
+    clearSth({
+      patterns: [/console.log\(.*\)/g]
+    }),
     vitePluginImp({
       libList: [{
         libName: 'element-plus',
@@ -50,5 +54,6 @@ export default defineConfig({
   },
   build: {
     // output: {}
+    sourcemap: false
   }
 })

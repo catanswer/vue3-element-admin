@@ -1,8 +1,8 @@
 <template>
   <div class="page-container">
-    <el-scrollbar>
-        <div style="height: 1000px; ">123213</div>
-    </el-scrollbar>
+    <smart-layout types="scroll">
+      <div style="height: 1000px; ">123213</div>
+    </smart-layout>
   </div>
 </template>
 

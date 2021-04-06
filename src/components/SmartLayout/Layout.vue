@@ -44,9 +44,10 @@
 
 <style lang="scss" scoped>
   .content-container {
-    width: 100%;
-    height: 100%;
+    height: calc(100% - 20px);
+    padding: 10px;
     overflow-x: hidden;
+    background-color: #fff;
   }
   .auto-container {
     display: flex;
@@ -54,7 +55,8 @@
   }
   .auto-container, .scroll-container {
     box-sizing: border-box;
-    height: 100%
+    height: 100%;
+    overflow-x: hidden;
   }
 </style>
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="auto-container"
+    class="smart-container"
     :class="wrapClass"
   >
     <Layout
@@ -60,9 +60,7 @@
 
 
 <style lang="scss" scoped>
-.auto-container {
-  display: flex;
-  flex-direction: column;
+.smart-container {
   height: 100%;
 }
 </style>

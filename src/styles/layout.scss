@@ -5,6 +5,7 @@
   bottom: 0;
   width: $sideMenuWidth;
   height: 100%;
+  z-index: 9;
   overflow: hidden;
   background-color: $menuBg;
   transition: width 0.28s;
@@ -61,5 +62,6 @@
   padding: 20px;
   box-sizing: border-box;
   overflow-x: hidden;
+  background-color: #f0f2f5;
 }
 

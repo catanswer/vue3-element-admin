@@ -11,7 +11,10 @@ const vuexLocal = new VuexPersistence({
         collapsed: state.app.sideMenu.collapsed
       }
     }
-  })
+  }),
+  filter: (mutation) => {
+    return mutation.type == 'app/TOGGLE_SIDEMENU'
+  }
 })
 
 const store = createStore({

@@ -46,17 +46,20 @@
       </el-row>
       <el-row :gutter="20">
         <el-col :span="12">
-          <div style="height: 400px; background: #fff"></div>
+          <todo />
         </el-col>
         <el-col :span="12">
           <div style="height: 400px; background: #fff"></div>
         </el-col>
       </el-row>
+      
     </el-scrollbar>
   </div>
 </template>
 
 <script setup>
+  import Todo from './components/Todo/index.vue'
+
 </script>
 
 <style lang="scss" scoped>

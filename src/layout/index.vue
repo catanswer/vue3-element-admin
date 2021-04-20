@@ -23,7 +23,7 @@
   import MainBox from './components/MainBox/index.vue'
 
   const store = useStore()
-  const sideMenuStatus = computed(() => store.state.app.sideMenu.opened)
+  const sideMenuStatus = computed(() => store.state.app.sideMenu.collapsed)
 </script>
 
 <style lang="scss" scoped>

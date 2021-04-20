@@ -4,12 +4,10 @@
       <div class="todo-header">
         <el-input
           v-model="newTodo"
-          size="medium"
           class="new-todo-input"
           placeholder="Add todo item"
         />
         <el-button
-          size="medium"
           type="primary"
           plain
           @click="handleAdd"

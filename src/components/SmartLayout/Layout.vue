@@ -48,6 +48,7 @@
     padding: 10px;
     overflow-x: hidden;
     background-color: #fff;
+    border-radius: 4px;;
   }
   .auto-container {
     display: flex;

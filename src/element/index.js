@@ -33,7 +33,8 @@ import {
   ElColorPicker,
   ElTag,
   ElPopconfirm,
-  ElLoading
+  ElLoading,
+  ElCard
 } from 'element-plus'
 
 const elementPlus = {
@@ -73,6 +74,7 @@ const elementPlus = {
     Vue.use(ElTag)
     Vue.use(ElPopconfirm)
     Vue.use(ElLoading)
+    Vue.use(ElCard)
   }
 }
 

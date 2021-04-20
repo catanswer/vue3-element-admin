@@ -8,9 +8,10 @@
       :types="types"
       :topOffset="topOffset"
       :wrap-class="wrapClass"
+      style="padding: 0"
     >
       <template #scroll>
-        <el-scrollbar>
+        <el-scrollbar noresize  view-style="overflow-x:hidden">
           <slot />
         </el-scrollbar>
       </template>

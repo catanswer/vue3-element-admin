@@ -39,7 +39,7 @@
   import Logo from './Logo.vue'
 
   const store = useStore()
-  const isCollapse = computed(() => store.state.app.sideMenu.opened)
+  const isCollapse = computed(() => store.state.app.sideMenu.collapsed)
 
   const currentRoute = useRoute()
 

@@ -1,5 +1,8 @@
 <template>
-  <div class="content-container">
+  <div
+    class="content-container"
+    :style="{height: types === 'auto' ? 'calc(100% - 20px)' : '100%'}"
+    >
     <div
       v-if="types === 'auto'"
       class="auto-container"
@@ -12,6 +15,7 @@
     <div
       v-if="types === 'scroll'"
       class="scroll-container"
+      
       :class="wrapClass"
     >
       <slot name="scroll" />
@@ -44,7 +48,7 @@
 
 <style lang="scss" scoped>
   .content-container {
-    height: calc(100% - 20px);
+    // height: calc(100% - 20px);
     padding: 10px;
     overflow-x: hidden;
     background-color: #fff;
